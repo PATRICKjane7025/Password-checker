@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+</head>
+<body>
+    <h1>Test Results</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Password Strength</th>
+                <th>Suggestions</th>
+                <th>Suggested New Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+                <tr>
+                    <td>{{ result.username }}</td>
+                    <td>{{ result.password }}</td>
+                    <td>{{ result.status }}</td>
+                    <td>{{ result.password_strength }}</td>
+                    <td>
+                        <ul>
+                            {% for suggestion in result.suggestions %}
+                                <li>{{ suggestion }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ result.suggested_new_password if result.password_strength == 'Weak' else 'N/A' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Go Back</a>
+</body>
+</html>
